@@ -3,7 +3,9 @@ from sqlite3 import Error
 from flask import Flask, render_template
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
-from PIL import Image
+import io
+import urllib
+import base64
 
 app = Flask(__name__)
 
@@ -29,28 +31,21 @@ def select_task_by_cluster(conn, cluster):
     :return:
     """
     cur = conn.cursor()
-    cur.execute("SELECT wc FROM Clusters WHERE cluster=?", (cluster,))
+    cur.execute("SELECT wc FROM Cluster WHERE clusters=?", (cluster,))
 
     rows = cur.fetchall()
-
-def main():
-    database = r"F:\ppats\Website\flask dashboard\apps\db.sqlite3"
-
-    # create a database connection
-    conn = create_connection(database)
-    with conn:
-        print("1. Query task by cluster:")
-        select_task_by_cluster(conn, 1)
-
-       
+    return rows
 
 @app.route('/')
 def home_page():
     return render_template('index.html')
 
-
-@app.route('/word_cloud', methods=['GET'])
+@app.route('/word_cloud')
 def word_cloud():
+    # create a database connection
+    database = r"F:\skripsi\Website\flask dashboard\apps\db.sqlite3"
+    conn = create_connection(database)
+    # Get Data
     cluster0 = select_task_by_cluster(conn, 0)
     comment_words = ''
     stopwords = set(STOPWORDS)
@@ -66,21 +61,27 @@ def word_cloud():
         # Converts each token into lowercase
         for i in range(len(tokens)):
             tokens[i] = tokens[i].lower()
-	
-	    comment_words += " ".join(tokens)+" "
         
-        wordcloud = WordCloud(width = 800, height = 800,
+        comment_words += " ".join(tokens)+" "
+        
+    wordcloud = WordCloud(width = 800, height = 800,
                             background_color ='purple',
                             colormap='Pastel1',
 				            stopwords = stopwords,
 				            min_font_size = 10).generate(comment_words)
 
         
-plt.figure(figsize = (5, 5), facecolor = None)
-plt.imshow(wordcloud)
-plt.axis("off")
-plt.tight_layout(pad = 0)
-plt.show()
+    plt.figure(figsize = (5, 5), facecolor = None)
+    plt.imshow(wordcloud)
+    plt.axis("off")
+    plt.tight_layout(pad = 0)
+    # plt.savefig('generated_plot.png')
+
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+    plot_data = urllib.parse.quote(base64.b64encode(img.getvalue()).decode('utf-8'))
+    return render_template('word_cloud.html', plot_url=plot_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
