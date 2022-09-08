@@ -1,0 +1,47 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+ <!--Tabel dataset-->
+  <!-- offcanvas -->
+  <main class="mt-5 pt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Satlantas Polrestabes Kota Makassar</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid py-3" >
+      <div class="row">
+        <div class="col-10">
+          <div class="card mb-3">
+            <div class="card-header pb-0">
+              <p>Website ini memuat informasi tentang jenis-jenis pelanggaran yang sering terjadi di Makassar. 
+                Pemanfaatan algoritma K-Medoids dilakukan untuk membagi data pelanggaran ke beberapa cluster.
+                Diperoleh 9 cluster yang berbeda dan telah divisualisasikan dalam bentuk Word Cloud yang diharapkan 
+                dapat membantu pihak Satlantas dalam memberi penindakan dan penanganan yang tepat bagi para pengendara guna
+                meminimalisir terjadinya pelanggaran lalu lintas di Makassar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+    
+
+      
+    </div>
+
+      {% include "includes/footer.html" %}
+
+  
+
+{% endblock content %}
+
+

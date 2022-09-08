@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Word Cloud {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+  <!-- offcanvas -->
+  <main class="mt-5 pt-3">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Word Cloud Cluster 1
+            </div>
+            <div class="card-body">
+                
+              <canvas class="chart" action="" width="400" height="200" method="POST" >
+
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Word Cloud Cluster 2
+            </div>
+            <div class="card-body">
+              <canvas class="chart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      {% include "includes/footer.html" %}
+
+  
+
+{% endblock content %}
+
+
