@@ -6,32 +6,224 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
+ <!--Tabel dataset-->
   <!-- offcanvas -->
   <main class="mt-5 pt-3">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-12">
+          <h4>Word Cloud Cluster</h4>
+        </div>
+      </div>
+    </div>
+
+   
+
+      <div class="row">
+        <div class="col-9 mb-3">
           <div class="card h-100">
             <div class="card-header">
               <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-              Word Cloud Cluster 1
+              Word Cloud Cluster 0
             </div>
             <div class="card-body">
-                <img class="plot" src="data:image/png;base64, {{ plot_url }}" >
+              <table>
+                <tr>
+                <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster0s }}" > </td>
+                <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster0a }}"> </td>
+                </tr>
+              </table>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6 mb-3">
+
+        <!-- <div class="col-md-5 mb-3">
           <div class="card h-100">
             <div class="card-header">
               <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
               Word Cloud Cluster 2
             </div>
             <div class="card-body">
-              <img class="plot" src="data:image/png;base64, {{ plot_url }}" >
+              <img class="plot" style="width: 50%;"  src="data:image/png;base64, {{ plot_cluster1 }}" >
+            </div>
+          </div>
+        </div> -->
+
+        
+      <!-- <div class="row">
+        <div class="col-md-5 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Word Cloud Cluster 3
+            </div>
+            <div class="card-body">
+              <img class="plot" style="width: 50%;" src="data:image/png;base64, {{ plot_cluster0 }}" >
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-9 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+              Word Cloud Cluster 1
+            </div>
+            <div class="card-body">
+              <table>
+                <tr>
+                <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster1s }}" > </td>
+                <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster1a }}"> </td>
+                </tr>
+              </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-9 mc-3">
+            <div class="card h-100">
+              <div class="card-header">
+                <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                Word Cloud Cluster 2
+              </div>
+              <div class="card-body">
+                <table>
+                  <tr>
+                  <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster2s }}" > </td>
+                  <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster2a }}"> </td>
+                  </tr>
+                </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-9 mb-3">
+              <div class="card h-100">
+                <div class="card-header">
+                  <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                  Word Cloud Cluster 3
+                </div>
+                <div class="card-body">
+                  <table>
+                    <tr>
+                    <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster3s }}" > </td>
+                    <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster3a }}"> </td>
+                    </tr>
+                  </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-9 mb-3">
+                <div class="card h-100">
+                  <div class="card-header">
+                    <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                    Word Cloud Cluster 4
+                  </div>
+                  <div class="card-body">
+                    <table>
+                      <tr>
+                      <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster4s }}" > </td>
+                      <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster4a }}"> </td>
+                      </tr>
+                    </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-9 mb-3">
+                  <div class="card h-100">
+                    <div class="card-header">
+                      <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                      Word Cloud Cluster 5
+                    </div>
+                    <div class="card-body">
+                      <table>
+                        <tr>
+                        <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster5s }}" > </td>
+                        <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster5a }}"> </td>
+                        </tr>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-9 mb-3">
+                    <div class="card h-100">
+                      <div class="card-header">
+                        <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                        Word Cloud Cluster 6
+                      </div>
+                      <div class="card-body">
+                        <table>
+                          <tr>
+                          <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster6s }}" > </td>
+                          <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster6a }}"> </td>
+                          </tr>
+                        </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-9 mb-3">
+                      <div class="card h-100">
+                        <div class="card-header">
+                          <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                          Word Cloud Cluster 7
+                        </div>
+                        <div class="card-body">
+                          <table>
+                            <tr>
+                            <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster7s }}" > </td>
+                            <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster7a }}"> </td>
+                            </tr>
+                          </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-9 mb-3">
+                        <div class="card h-100">
+                          <div class="card-header">
+                            <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
+                            Word Cloud Cluster 8
+                          </div>
+                          <div class="card-body">
+                            <table>
+                              <tr>
+                              <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster8s }}" > </td>
+                              <td> <img class="plot" style="width: 75%;" src="data:image/png;base64, {{ plot_cluster8a }}"> </td>
+                              </tr>
+                            </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+      
     </div>
 
       {% include "includes/footer.html" %}

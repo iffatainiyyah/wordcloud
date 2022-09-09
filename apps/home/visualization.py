@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 import io
 import urllib
 import base64
+import random
+
+
 
 app = Flask(__name__)
 
@@ -23,7 +26,7 @@ def create_connection(db):
 
     return conn
 
-def select_task_by_cluster(conn, cluster):
+def select_task_by_cluster(conn, cluster, table):
     """
     Query tasks by cluster
     :param conn: the Connection object
@@ -31,7 +34,7 @@ def select_task_by_cluster(conn, cluster):
     :return:
     """
     cur = conn.cursor()
-    cur.execute("SELECT wc FROM Cluster WHERE clusters=?", (cluster,))
+    cur.execute("SELECT wc FROM " + table + " WHERE clusters=?", (cluster,))
 
     rows = cur.fetchall()
     return rows
@@ -41,14 +44,17 @@ def home_page():
     return render_template('index.html')
 
 @app.route('/word_cloud')
-def word_cloud():
+def word_cloud(cluster, table):
     # create a database connection
     database = r"F:\skripsi\Website\flask dashboard\apps\db.sqlite3"
     conn = create_connection(database)
+
     # Get Data
-    cluster0 = select_task_by_cluster(conn, 0)
+    cluster0 = select_task_by_cluster(conn, cluster, table)
     comment_words = ''
     stopwords = set(STOPWORDS)
+
+    # Random Color
 
     for val in cluster0:
 
@@ -65,8 +71,8 @@ def word_cloud():
         comment_words += " ".join(tokens)+" "
         
     wordcloud = WordCloud(width = 800, height = 800,
-                            background_color ='purple',
-                            colormap='Pastel1',
+                            background_color = '#F5F5DC',
+                            colormap='tab10',
 				            stopwords = stopwords,
 				            min_font_size = 10).generate(comment_words)
 
@@ -75,13 +81,13 @@ def word_cloud():
     plt.imshow(wordcloud)
     plt.axis("off")
     plt.tight_layout(pad = 0)
-    # plt.savefig('generated_plot.png')
+    # plt.savefig('generated_plots.png')
 
     img = io.BytesIO()
     plt.savefig(img, format='png')
     img.seek(0)
     plot_data = urllib.parse.quote(base64.b64encode(img.getvalue()).decode('utf-8'))
-    return render_template('word_cloud.html', plot_url=plot_data)
+    return plot_data
 
 if __name__ == '__main__':
     app.run(debug=True)
