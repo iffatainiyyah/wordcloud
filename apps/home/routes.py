@@ -48,6 +48,16 @@ def wc():
     plot_data_7c = word_clouds("jenis_kendaraan", 7, "Cluster_s")
     plot_data_8c = word_clouds("jenis_kendaraan", 8, "Cluster_s")
 
+    plot_data_0d = word_clouds("wc", 0, "Cluster_m")
+    plot_data_1d = word_clouds("wc", 1, "Cluster_m")
+    plot_data_2d = word_clouds("wc", 2, "Cluster_m")
+    plot_data_3d = word_clouds("wc", 3, "Cluster_m")
+    plot_data_4d = word_clouds("wc", 4, "Cluster_m")
+    plot_data_5d = word_clouds("wc", 5, "Cluster_m")
+    plot_data_6d = word_clouds("wc", 6, "Cluster_m")
+    plot_data_7d = word_clouds("wc", 7, "Cluster_m")
+    plot_data_8d = word_clouds("wc", 8, "Cluster_m")
+
 
     return render_template('home/word-cloud.html', segment='word-cloud',
     plot_cluster0a=plot_data_0a, 
@@ -79,6 +89,16 @@ def wc():
     plot_cluster6c=plot_data_6c,
     plot_cluster7c=plot_data_7c,
     plot_cluster8c=plot_data_8c,
+
+    plot_cluster0d=plot_data_0d,
+    plot_cluster1d=plot_data_1d,
+    plot_cluster2d=plot_data_2d,
+    plot_cluster3d=plot_data_3d,
+    plot_cluster4d=plot_data_4d,
+    plot_cluster5d=plot_data_5d,
+    plot_cluster6d=plot_data_6d,
+    plot_cluster7d=plot_data_7d,
+    plot_cluster8d=plot_data_8d,
     )
 
 
