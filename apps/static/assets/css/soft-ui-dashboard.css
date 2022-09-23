@@ -17071,23 +17071,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-/*!
 
-=========================================================
-* Soft UI Dashboard - v1.0.5
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (site.license)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 .alert-primary {
   background-image: linear-gradient(310deg, #7928CA 0%, #d6006c 100%);
 }
@@ -18401,7 +18385,7 @@ textarea.form-control-lg {
 
 label,
 .form-label {
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: #344767;
@@ -22704,4 +22688,4 @@ pre[class*=language-] {
     overflow: auto !important;
   }
 }
-/*# sourceMappingURL=soft-ui-dashboard.css.map */
+

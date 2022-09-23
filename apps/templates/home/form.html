@@ -1,0 +1,102 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Forms {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+ <!--Tabel dataset-->
+  <!-- offcanvas -->
+<body>
+  <main class="mt-5 pt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Word Cloud Cluster</h4>
+        </div>
+      </div>
+    </div>
+
+   
+
+   
+
+    <div class="container-fluid py-3" >
+      <div class="row">
+        <div class="col-10">
+          <div class="card mb-3">
+            <div class="card-header pb-0">
+            <form action="{{ url_for('home_blueprint.wcs') }}", method="post">
+            <div class="mb-3">
+                <label for="select_column" class="form-label">Pilih data yang akan ditampilkan:</label>
+                <select id="select_column" name="column" class="form-select" aria-label="Default select example" onchange="detectJenisKendaraan()">
+                    <option disabled selected>Pilih data</option>
+                    <option value="pasal_hukuman">Pasal Hukuman</option>
+                    <option value="pasal_tuntutan">Pasal Tuntutan</option>
+                    <option value="jenis_kendaraan">Jenis Kendaraan</option>
+                    </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="select_cluster" class="form-label">Pilih Cluster:</label>
+              <select id="select_cluster" name="cluster" class="form-select" aria-label="Default select example">
+                  <option disabled selected>Pilih data</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="select_table" class="form-label">Word Cloud berdasarkan:</label>
+                <select id="select_table" name="table" class="form-select" aria-label="Default select example">
+                    <option disabled selected>Pilih data</option>
+                    <option value="Cluster_s">Singkatan Pasal</option>
+                    <option value="Cluster_a">Arti Pasal</option>
+                    </select>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" name="submit" class="btn bg-gradient-info">Submit</button>
+              </div>
+            </form>
+          </div>
+          <div class="card-body px-0 pt-0 pb-2">
+                
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+    <script>
+      function detectJenisKendaraan(){
+        var select_column = document.getElementById("select_column")
+        var select_table = document.getElementById("select_table")
+
+        if (select_column.value=="jenis_kendaraan"){
+
+          select_table.disabled = true;
+          select_table.selectedIndex = 0;
+        }
+        else{
+          select_table.disabled = false;
+        }
+
+      }
+    </script>
+
+      {% include "includes/footer.html" %}
+
+  
+
+{% endblock content %}
+
+

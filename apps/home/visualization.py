@@ -31,7 +31,7 @@ def select_task_by_cluster(conn, columns, cluster, table):
     """
     Query tasks by cluster
     :param conn: the Connection object
-    :param cluster:
+    :param columns, cluster, table:
     :return:
     """
     cur = conn.cursor()
@@ -41,12 +41,27 @@ def select_task_by_cluster(conn, columns, cluster, table):
     rows = cur.fetchall()
     return rows
 
+def select_task_for_vehicle(conn, columns, cluster):
+    """
+    Query tasks by cluster
+    :param conn: the Connection object
+    :param columns, cluster:
+    :return:
+    """
+    cur = conn.cursor()
+    # cur.execute("SELECT wc FROM " + table + " WHERE clusters=?", (cluster,))
+    cur.execute("SELECT " + columns + " FROM Cluster_a WHERE cluster=?", (cluster,))
+
+    rows = cur.fetchall()
+    return rows
+
+
 @app.route('/')
 def home_page():
     return render_template('index.html')
 
-@app.route('/word_cloud')
-def word_cloud(columns, cluster, table):
+@app.route('/symbol_wc')
+def symbol_wc(columns, cluster, table):
     # create a database connection
     database = r"F:\skripsi\Website\flask dashboard\apps\db.sqlite3"
     conn = create_connection(database)
@@ -56,7 +71,6 @@ def word_cloud(columns, cluster, table):
     words = ''
     stopwords = set(STOPWORDS)
 
-    # Random Color
 
     for val in cluster0:
 
@@ -93,18 +107,70 @@ def word_cloud(columns, cluster, table):
     plot_data = urllib.parse.quote(base64.b64encode(img.getvalue()).decode('utf-8'))
     return plot_data
 
-@app.route('/word_clouds')
-def word_clouds(columns, cluster, table):
+@app.route('/grouped_wc')
+def grouped_wc(columns, cluster, table):
     # create a database connection
     database = r"F:\skripsi\Website\flask dashboard\apps\db.sqlite3"
     conn = create_connection(database)
 
     # Get Data
     cluster0 = select_task_by_cluster(conn, columns, cluster, table)
-    words = ''
+    grouped_words = []
+    dictionary = {}
     stopwords = set(STOPWORDS)
 
-    # Random Color
+
+    for val in cluster0:
+
+        # typecaste each val to string
+        vals = val[0]
+
+        # split the value and grouped 3 words
+        tokens = vals.split()
+        grouped_words += [' '.join(tokens[i: i + 3]) for i in range(0, len(tokens), 3)]
+
+       # Converts each words into lowercase
+        for i in range(len(grouped_words)):
+            grouped_words[i] = grouped_words[i].lower()
+            # grouped_words[i] = re.sub(r'[^\w\s\,]', '', grouped_words[i])
+            grouped_words[i] = grouped_words[i].replace(',','')
+        
+    for word in grouped_words:
+        if word not in dictionary.keys():
+            dictionary[word] = 1
+        else:
+            dictionary[word] += 1
+
+    cloud = WordCloud(width = 1200, height = 500,
+                            background_color = '#400D51',
+                            colormap='tab10',
+				            stopwords = stopwords,
+				            min_font_size = 16)
+    cloud.generate_from_frequencies(dictionary)
+
+        
+    plt.figure(figsize = (5, 5), facecolor = None)
+    plt.imshow(cloud)
+    plt.axis("off")
+    plt.tight_layout(pad = 0)
+    # plt.savefig('generated_plots.png')
+
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+    plot_data = urllib.parse.quote(base64.b64encode(img.getvalue()).decode('utf-8'))
+    return plot_data
+
+@app.route('/vehicle_wc')
+def vehicle_wc(columns, cluster):
+    # create a database connection
+    database = r"F:\skripsi\Website\flask dashboard\apps\db.sqlite3"
+    conn = create_connection(database)
+
+    # Get Data
+    cluster0 = select_task_for_vehicle(conn, columns, cluster)
+    words = ''
+    stopwords = set(STOPWORDS)
 
     for val in cluster0:
 
