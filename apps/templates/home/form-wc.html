@@ -69,9 +69,8 @@
             </div>
 
             </form>
-            <h4>Word Cloud Cluster {{ plot_clusters }} berdasarkan {{ plot_columns }}</h4>
             <div class="card-body text-center">
-              <img class="plot" style="width: 25%;" src="data:image/png;base64, {{ plot_forms }}" >
+              <img class="plot" style="width: 50%;" src="data:image/png;base64, {{ plot_forms }}" >
             </div>
   
           <p></p>
@@ -113,8 +112,9 @@
         var keterangan = document.getElementById('detail')
         var data = document.getElementById('detail_point')
 
-        if (data.innerText = ""){
+        if (data.innerText == ""){
           keterangan.remove();
+          data.remove();
         }
       }
     </script>

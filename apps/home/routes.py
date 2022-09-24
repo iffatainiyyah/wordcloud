@@ -38,25 +38,16 @@ def wc():
     plot_data_7b = symbol_wc("pasal_hukuman", 7, "Cluster_s")
     plot_data_8b = symbol_wc("pasal_hukuman", 8, "Cluster_s")
     
-    plot_data_0c = vehicle_wc("jenis_kendaraan", 0, "Cluster_s")
-    plot_data_1c = vehicle_wc("jenis_kendaraan", 1, "Cluster_s")
-    plot_data_2c = vehicle_wc("jenis_kendaraan", 2, "Cluster_s")
-    plot_data_3c = vehicle_wc("jenis_kendaraan", 3, "Cluster_s")
-    plot_data_4c = vehicle_wc("jenis_kendaraan", 4, "Cluster_s")
-    plot_data_5c = vehicle_wc("jenis_kendaraan", 5, "Cluster_s")
-    plot_data_6c = vehicle_wc("jenis_kendaraan", 6, "Cluster_s")
-    plot_data_7c = vehicle_wc("jenis_kendaraan", 7, "Cluster_s")
-    plot_data_8c = vehicle_wc("jenis_kendaraan", 8, "Cluster_s")
+    plot_data_0c = vehicle_wc("jenis_kendaraan", 0)
+    plot_data_1c = vehicle_wc("jenis_kendaraan", 1)
+    plot_data_2c = vehicle_wc("jenis_kendaraan", 2)
+    plot_data_3c = vehicle_wc("jenis_kendaraan", 3)
+    plot_data_4c = vehicle_wc("jenis_kendaraan", 4)
+    plot_data_5c = vehicle_wc("jenis_kendaraan", 5)
+    plot_data_6c = vehicle_wc("jenis_kendaraan", 6)
+    plot_data_7c = vehicle_wc("jenis_kendaraan", 7)
+    plot_data_8c = vehicle_wc("jenis_kendaraan", 8)
 
-    plot_data_0d = vehicle_wc("wc", 0, "Cluster_m")
-    plot_data_1d = vehicle_wc("wc", 1, "Cluster_m")
-    plot_data_2d = vehicle_wc("wc", 2, "Cluster_m")
-    plot_data_3d = vehicle_wc("wc", 3, "Cluster_m")
-    plot_data_4d = vehicle_wc("wc", 4, "Cluster_m")
-    plot_data_5d = vehicle_wc("wc", 5, "Cluster_m")
-    plot_data_6d = vehicle_wc("wc", 6, "Cluster_m")
-    plot_data_7d = vehicle_wc("wc", 7, "Cluster_m")
-    plot_data_8d = vehicle_wc("wc", 8, "Cluster_m")
 
 
     return render_template('home/word-cloud.html', segment='word-cloud',
@@ -88,17 +79,7 @@ def wc():
     plot_cluster5c=plot_data_5c,
     plot_cluster6c=plot_data_6c,
     plot_cluster7c=plot_data_7c,
-    plot_cluster8c=plot_data_8c,
-
-    plot_cluster0d=plot_data_0d,
-    plot_cluster1d=plot_data_1d,
-    plot_cluster2d=plot_data_2d,
-    plot_cluster3d=plot_data_3d,
-    plot_cluster4d=plot_data_4d,
-    plot_cluster5d=plot_data_5d,
-    plot_cluster6d=plot_data_6d,
-    plot_cluster7d=plot_data_7d,
-    plot_cluster8d=plot_data_8d,
+    plot_cluster8c=plot_data_8c
     )
 
 
@@ -211,7 +192,7 @@ def wcs():
 
 
         return render_template('home/form-wc.html', plot_forms = result, plot_details = details, plot_columns = columns,
-                                plot_clusters = clusters, plot_tables = tables)
+                                plot_clusters = clusters, plot_tables = tables, segment="form")
 
 
-    return render_template('home/form.html', plot_forms, plot_details)
+    return render_template('home/form.html', plot_forms, plot_details, segment="form")

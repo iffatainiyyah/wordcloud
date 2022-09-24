@@ -87,7 +87,7 @@ def symbol_wc(columns, cluster, table):
         words += " ".join(tokens)+" "
         
         
-    wordcloud = WordCloud(width = 800, height = 800,
+    wordcloud = WordCloud(width = 1200, height = 800,
                             background_color = '#FFFDE3',
                             colormap='tab10',
 				            stopwords = stopwords,
@@ -141,8 +141,8 @@ def grouped_wc(columns, cluster, table):
         else:
             dictionary[word] += 1
 
-    cloud = WordCloud(width = 1200, height = 500,
-                            background_color = '#400D51',
+    cloud = WordCloud(width = 1200, height = 800,
+                            background_color = '#FFFDE3',
                             colormap='tab10',
 				            stopwords = stopwords,
 				            min_font_size = 16)
@@ -187,7 +187,7 @@ def vehicle_wc(columns, cluster):
         words += " ".join(tokens)+" "
         
         
-    wordcloud = WordCloud(width = 800, height = 800,
+    wordcloud = WordCloud(width = 1200, height = 800,
                             background_color = '#FFFDE3',
                             colormap='tab10',
 				            stopwords = stopwords,
