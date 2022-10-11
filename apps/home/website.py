@@ -7,67 +7,21 @@ import io
 import urllib
 import base64
 import random
-
-
-
+import re
+import numpy as np
 
 app = Flask(__name__)
 
-def create_connection(db):
-    """ create a database connection to the SQLite database
-        specified by the db_file
-    :param db_file: database file
-    :return: Connection object or None
-    """
-    conn = None
-    try:
-        conn = sqlite3.connect(db)
-    except Error as e:
-        print(e)
-
-    return conn
-
-def select_task_by_cluster(conn, columns, cluster, table):
-    """
-    Query tasks by cluster
-    :param conn: the Connection object
-    :param columns, cluster, table:
-    :return:
-    """
-    cur = conn.cursor()
-    # cur.execute("SELECT wc FROM " + table + " WHERE clusters=?", (cluster,))
-    cur.execute("SELECT " + columns + " FROM " + table + " WHERE cluster=?", (cluster,))
-
-    rows = cur.fetchall()
-    return rows
-
-def select_task_for_vehicle(conn, columns, cluster):
-    """
-    Query tasks by cluster
-    :param conn: the Connection object
-    :param columns, cluster:
-    :return:
-    """
-    cur = conn.cursor()
-    # cur.execute("SELECT wc FROM " + table + " WHERE clusters=?", (cluster,))
-    cur.execute("SELECT " + columns + " FROM Cluster_a WHERE cluster=?", (cluster,))
-
-    rows = cur.fetchall()
-    return rows
 
 
-@app.route('/')
 def home_page():
     return render_template('index.html')
 
-@app.route('/symbol_wc')
-def symbol_wc(columns, cluster, table):
-    # create a database connection
-    database = r"F:\skripsi\Website\flask dashboard\apps\db.sqlite3"
-    conn = create_connection(database)
+
+def symbol_wc(df, column,cluster):
 
     # Get Data
-    cluster0 = select_task_by_cluster(conn, columns, cluster, table)
+    cluster0 = df.loc[df[column] == cluster]
     words = ''
     stopwords = set(STOPWORDS)
 
@@ -107,14 +61,11 @@ def symbol_wc(columns, cluster, table):
     plot_data = urllib.parse.quote(base64.b64encode(img.getvalue()).decode('utf-8'))
     return plot_data
 
-@app.route('/grouped_wc')
-def grouped_wc(columns, cluster, table):
-    # create a database connection
-    database = r"F:\skripsi\Website\flask dashboard\apps\db.sqlite3"
-    conn = create_connection(database)
+
+def grouped_wc(df,column,cluster):
 
     # Get Data
-    cluster0 = select_task_by_cluster(conn, columns, cluster, table)
+    cluster0 = df.loc[df[column] == cluster]
     grouped_words = []
     dictionary = {}
     stopwords = set(STOPWORDS)
@@ -161,14 +112,11 @@ def grouped_wc(columns, cluster, table):
     plot_data = urllib.parse.quote(base64.b64encode(img.getvalue()).decode('utf-8'))
     return plot_data
 
-@app.route('/vehicle_wc')
-def vehicle_wc(columns, cluster):
-    # create a database connection
-    database = r"F:\skripsi\Website\flask dashboard\apps\db.sqlite3"
-    conn = create_connection(database)
+
+def vehicle_wc(df,column,cluster):
 
     # Get Data
-    cluster0 = select_task_for_vehicle(conn, columns, cluster)
+    cluster0 = df.loc[df[column] == cluster]
     words = ''
     stopwords = set(STOPWORDS)
 
@@ -207,5 +155,58 @@ def vehicle_wc(columns, cluster):
     plot_data = urllib.parse.quote(base64.b64encode(img.getvalue()).decode('utf-8'))
     return plot_data
 
-if __name__ == '__main__':
+def regex_split(series, pattern):
+    data = []
+    
+    for row in series:
+        list_pasal = []
+        for pasal in row:
+            result = re.findall(pattern, pasal)
+            #print(pasal)
+            list_pasal.append(result[0].strip())        
+
+        data.append(list_pasal)
+  
+    return data
+
+def one_hot(df, nama_pasal):
+    data = {}
+    for list_of_hukuman in df[nama_pasal]:
+        for pasal in list_of_hukuman:
+            if pasal not in data.keys():
+                data[pasal] = []
+                
+                for list_hukuman in df[nama_pasal]:
+                    if pasal in list_hukuman:
+                        data[pasal].append(1)
+                    else:
+                        data[pasal].append(0)
+
+    for key, value in data.items():
+        df[key] = value
+    return df
+
+def euclideanDistance (x,y):
+  squared_ed = 0
+  for i in range (len(x)):
+    squared_ed += (x[i] - y[i])**2
+  ed = np.sqrt(squared_ed)
+  return ed
+
+def prediksi(medoid, data):
+    pred = []
+
+    for i in range (len(data)):
+      # Jarak dari poin data ke setiap medoids
+      ed_list = []
+      
+      for j in range(len(medoid)):
+        ed_list.append(euclideanDistance(medoid[j], data[i] ))
+
+      pred.append(ed_list.index(min(ed_list)))
+
+    return np.array(pred)
+    
+
+if __name__ == "__main__":
     app.run(debug=True)

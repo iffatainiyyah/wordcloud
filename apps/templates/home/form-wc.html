@@ -27,15 +27,15 @@
         <div class="col-10">
           <div class="card mb-3">
             <div class="card-header pb-0">
-            <form action="{{ url_for('home_blueprint.wcs') }}", method="post">
+            <form action="{{ url_for('home_blueprint.wcs') }}" method="post">
 
             <div class="mb-3">
                 <label for="select_column" class="form-label">Pilih data yang akan ditampilkan:</label>
-                <select id="select_column" name="column" value="{{columns}}" class="form-select" aria-label="Default select example" onchange="detectJenisKendaraan()">
+                <select id="select_column" name="column" value="{{ plot_columns }}" class="form-select" aria-label="Default select example" onchange="detectJenisKendaraan()">
                     <option disabled selected>Pilih data</option>
-                    <option value="pasal_hukuman">Pasal Hukuman</option>
-                    <option value="pasal_tuntutan">Pasal Tuntutan</option>
-                    <option value="jenis_kendaraan">Jenis Kendaraan</option>
+                    <option value="pasal_hukuman" {% if 'pasal_hukuman' in plot_columns %} selected {% endif %} >Pasal Hukuman</option>
+                    <option value="pasal_tuntutan" {% if 'pasal_tuntutan' in plot_columns %} selected {% endif %}>Pasal Tuntutan</option>
+                    <option value ="jenis_kendaraan" {% if 'jenis_kendaraan' in plot_columns %} selected {% endif %}>Jenis Kendaraan</option>
                     </select>
             </div>
 
@@ -43,15 +43,15 @@
               <label for="select_cluster" class="form-label">Pilih Cluster:</label>
               <select id="select_cluster" name="cluster" class="form-select" aria-label="Default select example">
                   <option disabled selected>Pilih data</option>
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
+                  <option value="0" {% if '0' in plot_clusters %} selected {% endif %}>0</option>
+                  <option value="1" {% if '1' in plot_clusters %} selected {% endif %}>1</option>
+                  <option value="2" {% if '2' in plot_clusters %} selected {% endif %}>2</option>
+                  <option value="3" {% if '3' in plot_clusters %} selected {% endif %}>3</option>
+                  <option value="4" {% if '4' in plot_clusters %} selected {% endif %}>4</option>
+                  <option value="5" {% if '5' in plot_clusters %} selected {% endif %}>5</option>
+                  <option value="6" {% if '6' in plot_clusters %} selected {% endif %}>6</option>
+                  <option value="7" {% if '7' in plot_clusters %} selected {% endif %}>7</option>
+                  <option value="8" {% if '8' in plot_clusters %} selected {% endif %}>8</option>
               </select>
             </div>
 
@@ -59,8 +59,8 @@
                 <label for="select_table" class="form-label">Word Cloud berdasarkan:</label>
                 <select id="select_table" name="table" class="form-select" aria-label="Default select example">
                     <option disabled selected>Pilih data</option>
-                    <option value="Cluster_s">Singkatan Pasal</option>
-                    <option value="Cluster_a">Arti Pasal</option>
+                    <option value="Cluster_s" {% if 'Cluster_s' in plot_tables %} selected {% endif %}>Singkatan Pasal</option>
+                    <option value="Cluster_a" {% if 'Cluster_a' in plot_tables %} selected {% endif %}>Arti Pasal</option>
                     </select>
             </div>
 

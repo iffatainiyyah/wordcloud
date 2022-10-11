@@ -17,6 +17,18 @@
         </li>
 
         <li class="nav-item">
+          <a class="nav-link {% if 'upload' in segment %} active {% endif %}" href="/addData.html">
+            <span class="nav-link-text ms-1">Upload Data</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if 'pelanggaran' in segment %} active {% endif %}" href="/datapelanggaran.html">
+            <span class="nav-link-text ms-1">Data Pelanggaran</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link {% if 'form' in segment %} active {% endif %}" href="/form.html">
             <span class="nav-link-text ms-1">Generate</span>
           </a>
