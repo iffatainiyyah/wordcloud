@@ -2116,6 +2116,7 @@ progress {
 }
 .table > thead {
   vertical-align: bottom;
+  text-align: center;
 }
 
 .table-group-divider {
@@ -20790,6 +20791,7 @@ hr.horizontal.gray-light {
 
 .table tbody{
   font-size: 14px;
+  text-align: center;
   
 }
 .table tbody tr:last-child td {

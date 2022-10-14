@@ -30,11 +30,11 @@
             <form action="{{ url_for('home_blueprint.wcs') }}", method="post">
             <div class="mb-3">
                 <label for="select_column" class="form-label">Pilih data yang akan ditampilkan:</label>
-                <select id="select_column" name="column" class="form-select" aria-label="Default select example" onchange="detectJenisKendaraan()">
+                <select id="select_column" name="column" class="form-select" aria-label="Default select example">
                     <option disabled selected>Pilih data</option>
-                    <option value="pasal_hukuman">Pasal Hukuman</option>
-                    <option value="pasal_tuntutan">Pasal Tuntutan</option>
-                    <option value="jenis_kendaraan">Jenis Kendaraan</option>
+                    <option value=pasal_hukuman>Pasal Hukuman</option>
+                    <option value=pasal_tuntutan>Pasal Tuntutan</option>
+                    <option value=jenis_kendaraan>Jenis Kendaraan</option>
                     </select>
             </div>
 
@@ -67,7 +67,7 @@
     </div>
   </main>
 </body>
-    <script>
+    <!-- <script>
       function detectJenisKendaraan(){
         var select_column = document.getElementById("select_column")
         var select_table = document.getElementById("select_table")
@@ -82,7 +82,7 @@
         }
 
       }
-    </script>
+    </script> -->
 
       {% include "includes/footer.html" %}
 
